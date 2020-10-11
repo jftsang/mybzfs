@@ -1,0 +1,97 @@
+world
+ name dogfight
+ size 500.0
+ flagHeight 10.0
+end
+
+options
+ -c
+ -fb
+ -j
+ +r
+ -autoTeam
+ -set _explodeTime 2
+ -set _tankSpeed 45
+ -set _shotRange 200
+ -set _shotSpeed 1000
+ -set _reloadTime 15
+ -set _shotTailLength 10
+ -set _shotsKeepVerticalVelocity 1
+ -ms 50
+ -mp 4,10,0,10,0,5
+ -set _wingsJumpCount 1000
+ -set _wingsGravity -7
+end
+
+waterLevel
+ name splash
+ height 1
+end
+
+# Bases
+
+base
+ position 450 0 14
+ size 20 20 3
+ color 1
+ oncap SW
+end
+
+base
+ position -450 0 14
+ size 20 20 3
+ color 3
+ oncap SW
+end
+
+zone
+ position 450 0 20
+ size 50 500 5
+ zoneflag WG 10
+ zoneflag L 5
+ team 1
+end
+
+zone
+ position -450 0 20
+ size 50 500 5
+ zoneflag WG 10
+ zoneflag L 5
+ team 3
+end
+
+# Platforms
+meshbox
+ position 440 0 15
+ size 60 500 1
+end
+
+meshbox
+ position 420 0 0
+ size 80 500 2
+end
+
+meshbox
+ position -440 0 15
+ size 60 500 1
+end
+
+meshbox
+ position -420 0 0
+ size 80 500 2
+end
+
+# Physics (siderails)
+
+physics
+ name eastbound
+ linear 40 0 0
+end
+
+physics
+ name westbound
+ linear -40 0 0
+end
+
+
+
