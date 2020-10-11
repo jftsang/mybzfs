@@ -6,13 +6,15 @@ HEADER = "dogfight_header.bzw"
 def vec2str(vec):
     return " ".join([str(x) for x in vec])
 
-def make_meshbox(position, size, rotation=0, physics=None):
-    phys = f"phydrv {physics}" if physics else ""
+def make_meshbox(position, size, rotation=0, physics=None, texture=None):
+    physline = f"phydrv {physics}" if physics else ""
+    textureline = f"matref {texture}" if texture else ""
     return f"""meshbox
  position {vec2str(position)}
  size {vec2str(size)}
  rotation {rotation}
- {phys}
+ {physline}
+ {textureline}
 end"""
 
 def make_shield(name, position, rotation, size, border):
@@ -32,21 +34,23 @@ with open(HEADER, "r") as head:
     print(head.read())
 
 shields = [
-    make_shield("red_bottom_north", [400, 300, 0], 180, [0.125, 150, 6], 1.12),
-    make_shield("red_bottom_south", [400, -300, 0], 180, [0.125, 150, 6], 1.12),
-    make_shield("red_top_north", [400, 300, 15], 180, [0.125, 150, 6], 1.12),
-    make_shield("red_top_south", [400, -300, 15], 180, [0.125, 150, 6], 1.12),
+    make_shield("red_bottom_north", [420, 300, 0], 180, [0.125, 150, 5.5], 0.9),
+    make_shield("red_bottom_south", [420, -300, 0], 180, [0.125, 150, 5.5], 0.9),
+    make_shield("red_top_north", [410, 300, 15], 180, [0.125, 100, 7], 0.9),
+    make_shield("red_top_south", [410, -300, 15], 180, [0.125, 100, 7], 0.9),
 
-    make_shield("red_top_mid_front", [420, 0, 15], 180, [0.125, 30, 6], 1.12),
-    make_shield("red_top_mid_right", [450, 30, 15], 90, [0.125, 30, 6], 1.12),
-    make_shield("red_top_mid_left", [450, -30, 15], -90, [0.125, 30, 6], 1.12),
+    make_shield("red_base_front", [420, 0, 15], 180, [0.125, 15, 6], 0.9),
+    make_shield("red_base_right", [450, 30, 15], 90, [0.125, 10, 6], 0.9),
+    make_shield("red_base_left", [450, -30, 15], -90, [0.125, 10, 6], 0.9),
 
-    make_shield("blue_bottom_north", [-400, 300, 0], 0, [0.125, 150, 6], 1.12),
-    make_shield("blue_bottom_south", [-400, -300, 0], 0, [0.125, 150, 6], 1.12),
-    make_shield("blue_top_north", [-400, 300, 15], 0, [0.125, 150, 6], 1.12),
-    make_shield("blue_top_south", [-400, -300, 15], 0, [0.125, 150, 6], 1.12),
+    make_shield("blue_bottom_north", [-420, 300, 0], 0, [0.125, 150, 5.5], 0.9),
+    make_shield("blue_bottom_south", [-420, -300, 0], 0, [0.125, 150, 5.5], 0.9),
+    make_shield("blue_top_north", [-410, 300, 15], 0, [0.125, 100, 7], 0.9),
+    make_shield("blue_top_south", [-410, -300, 15], 0, [0.125, 100, 7], 0.9),
 
-    make_shield("blue_top_mid", [-420, 0, 15], 0, [0.125, 40, 6], 1.12),
+    make_shield("blue_base", [-420, 0, 15], 0, [0.125, 15, 6], 0.9),
+    make_shield("blue_base_right", [-450, -30, 15], -90, [0.125, 10, 6], 0.9),
+    make_shield("blue_base_left", [-450, 30, 15], 90, [0.125, 10, 6], 0.9),
 ]
 
 print("")
@@ -63,13 +67,17 @@ for xpos in range(-350, 400, 50):
     print(make_meshbox([xpos, 0, 15], [20, 20, 1]))
 
 for xpos in range(-300, 350, 50):
+    if xpos == 0:
+        continue
     for ypos in range(-350, 420, 70):
+        if random.random() > 0.6:
+            continue
         print(make_meshbox([xpos + random.uniform(-4, 4),
                             ypos + random.uniform(-4, 4),
                             0],
-                        size=[20+random.uniform(-15, 0),
-                              20+random.uniform(-15, 2),
-                              5 + random.uniform(-3, 15)],
+                        size=[20+random.uniform(-5, 10),
+                              20+random.uniform(-5, 10),
+                              5 + random.uniform(0, 2)],
                         rotation=random.uniform(0, 360))
             )
 
@@ -78,5 +86,11 @@ print(make_meshbox([0, -300, 5], [230, 20, 1]))
 
 print("")
 print("# Side rails")
-print(make_meshbox([0, 450, 5], [400, 30, 1], physics="eastbound"))
-print(make_meshbox([0, -450, 5], [400, 30, 1], physics="westbound"))
+print(make_meshbox([0, 450, 5], [270, 30, 1], physics="eastbound", texture="caution"))
+print(make_meshbox([0, -450, 5], [270, 30, 1], physics="westbound", texture="caution"))
+
+print("# Trampolines")
+print(make_meshbox([300, 450, 5], [30, 30, 1],
+                   physics="redtrampoline", texture="redtrampolinetex"))
+print(make_meshbox([-300, -450, 5], [30, 30, 1],
+                   physics="bluetrampoline", texture="bluetrampolinetex"))

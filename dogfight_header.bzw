@@ -5,8 +5,14 @@ world
 end
 
 options
- -c
+ -c # CTF mode
  -fb
+
+ # Disable burrow since this is a water map
+ -f B
+
+ -a 50 38
+
  -j
  +r
  -autoTeam
@@ -31,15 +37,15 @@ end
 # Bases
 
 base
- position 450 0 14
- size 20 20 3
+ position 450 0 14.5
+ size 20 20 1.7
  color 1
  oncap SW
 end
 
 base
- position -450 0 14
- size 20 20 3
+ position -450 0 14.5
+ size 20 20 1.7
  color 3
  oncap SW
 end
@@ -60,38 +66,112 @@ zone
  team 3
 end
 
-# Platforms
-meshbox
- position 440 0 15
- size 60 500 1
-end
-
-meshbox
- position 420 0 0
- size 80 500 2
-end
-
-meshbox
- position -440 0 15
- size 60 500 1
-end
-
-meshbox
- position -420 0 0
- size 80 500 2
-end
-
 # Physics (siderails)
 
 physics
  name eastbound
- linear 40 0 0
+ linear 85 0 0
 end
 
 physics
  name westbound
- linear -40 0 0
+ linear -85 0 0
+end
+
+physics
+ name redtrampoline
+ linear 50 0 20
+end
+
+physics
+ name bluetrampoline
+ linear -50 0 20
 end
 
 
+# Materials
 
+material
+ name caution
+ texture caution
+end
+
+material
+ name redtrampolinetex
+ texture red_tank
+end
+
+material
+ name bluetrampolinetex
+ texture blue_tank
+end
+
+# Platforms
+
+meshbox
+ position 430 0 15
+ size 45 360 1
+end
+
+meshbox
+ position 474 0 15
+ size 1 360 2.4
+end
+
+meshbox
+ position 400 0 0
+ size 100 500 2
+end
+
+meshbox
+ position -430 0 15
+ size 45 360 1
+end
+
+meshbox
+ position -474 0 15
+ size 1 360 2.4
+end
+
+meshbox
+ position -400 0 0
+ size 100 500 2
+end
+
+# Corner platforms and their walls
+
+meshbox
+ position 450 430 15
+ size 50 70 1
+end
+meshbox
+ position 487.5 359 15
+ size 12.5 1 2.4
+end
+
+meshbox
+ position 450 -430 15
+ size 50 70 1
+end
+meshbox
+ position 487.5 -359 15
+ size 12.5 1 2.4
+end
+
+meshbox
+ position -450 430 15
+ size 50 70 1
+end
+meshbox
+ position -487.5 359 15
+ size 12.5 1 2.4
+end
+
+meshbox
+ position -450 -430 15
+ size 50 70 1
+end
+meshbox
+ position -487.5 -359 15
+ size 12.5 1 2.4
+end
