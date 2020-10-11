@@ -17,6 +17,18 @@ def make_meshbox(position, size, rotation=0, physics=None, texture=None):
  {textureline}
 end"""
 
+def make_pyramid(position, size, rotation=0, physics=None, texture=None):
+    physline = f"phydrv {physics}" if physics else ""
+    textureline = f"matref {texture}" if texture else ""
+    return f"""pyramid
+ position {vec2str(position)}
+ size {vec2str(size)}
+ rotation {rotation}
+ {physline}
+ {textureline}
+end"""
+
+
 def make_shield(name, position, rotation, size, border):
     return f"""teleporter {name}
  position {vec2str(position)}
@@ -61,26 +73,47 @@ print("# Shields")
 for s in shields:
     print(s)
 
-print("")
-print("# Islands")
-for xpos in range(-350, 400, 50):
-    print(make_meshbox([xpos, 0, 15], [20, 20, 1]))
+print("\n# Central aisle")
+print(make_meshbox([0, 0, 15], [400, 20, 1]))
+print(make_meshbox([0, 19, 15], [400, 1, 2.4]))
+print(make_meshbox([0, -19, 15], [400, 1, 2.4]))
 
+print(make_meshbox([0, 0, 0], [400, 20, 2]))
+print(make_meshbox([0, 19, 0], [400, 1, 3.4]))
+print(make_meshbox([0, -19, 0], [400, 1, 3.4]))
+
+#for xpos in range(-350, 400, 50):
+#    print(make_meshbox([xpos, 0, 10], [20, 20, 1]))
+
+print("\n# Islands")
 for xpos in range(-300, 350, 50):
     if xpos == 0:
         continue
-    for ypos in range(-350, 420, 70):
-        if random.random() > 0.6:
+    for ypos in range(-280, 320, 40):
+        if random.random() > 0.5:
             continue
-        print(make_meshbox([xpos + random.uniform(-4, 4),
-                            ypos + random.uniform(-4, 4),
-                            0],
-                        size=[20+random.uniform(-5, 10),
-                              20+random.uniform(-5, 10),
-                              5 + random.uniform(0, 2)],
-                        rotation=random.uniform(0, 360))
-            )
+        if random.random() > 0.5:
+            print(make_meshbox([xpos + random.uniform(-8, 8),
+                                ypos + random.uniform(-8, 8),
+                                0],
+                            size=[20+random.uniform(-5, 5),
+                                  20+random.uniform(-5, 5),
+                                  2 + random.uniform(0, 7)],
+                            rotation=random.uniform(0, 360))
+                )
+        else:
+            print(make_pyramid([xpos + random.uniform(-8, 8),
+                                ypos + random.uniform(-8, 8),
+                                0],
+                            size=[10+random.uniform(-5, 2),
+                                  10+random.uniform(-5, 2),
+                                  8 + random.uniform(0, 7)],
+                            rotation=random.uniform(0, 360),
+                            texture="shiny")
+                )
 
+print("")
+print("# Inner rails")
 print(make_meshbox([0, 300, 5], [230, 20, 1]))
 print(make_meshbox([0, -300, 5], [230, 20, 1]))
 

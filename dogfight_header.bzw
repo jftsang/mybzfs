@@ -6,27 +6,37 @@ end
 
 options
  -c # CTF mode
+ -mp 4,10,0,10,0,5
  -fb
 
  # Disable burrow since this is a water map
- -f B
+ -f BU
+ # Disable OO since it's dangerous
+ -f OO
+ # Disable PZ since it's stupid
+ -f PZ
 
  -a 50 38
 
+ #Tanks can jump
  -j
+
+ #Ordinance richochets
  +r
  -autoTeam
  -set _explodeTime 2
  -set _tankSpeed 45
+ -set _noClimb 0
  -set _shotRange 200
  -set _shotSpeed 1000
- -set _reloadTime 15
+ -set _reloadTime 20
  -set _shotTailLength 10
  -set _shotsKeepVerticalVelocity 1
  -ms 50
- -mp 4,10,0,10,0,5
  -set _wingsJumpCount 1000
  -set _wingsGravity -7
+ -set _laserAdVel 12
+ -set _laserAdLife 0.01
 end
 
 waterLevel
@@ -52,18 +62,35 @@ end
 
 zone
  position 450 0 20
- size 50 500 5
+ size 20 200 5
  zoneflag WG 10
  zoneflag L 5
  team 1
 end
 
 zone
+ position 400 0 2
+ size 100 200 5
+ zoneflag SW 5
+ zoneflag GM 5
+ team 1
+end
+
+
+zone
  position -450 0 20
- size 50 500 5
+ size 20 200 5
  zoneflag WG 10
  zoneflag L 5
  team 3
+end
+
+zone
+ position -400 0 2
+ size 100 200 5
+ zoneflag SW 5
+ zoneflag GM 5
+ team 1
 end
 
 # Physics (siderails)
@@ -104,6 +131,13 @@ end
 material
  name bluetrampolinetex
  texture blue_tank
+end
+
+material
+ name shiny
+ color 0 0.5 0 1.0
+ specular 0.25 0.5 0 1.0
+ shininess 5
 end
 
 # Platforms
