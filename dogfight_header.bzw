@@ -6,7 +6,7 @@ end
 
 options
  -c # CTF mode
- -mp 4,10,0,10,0,5
+ -mp 0,10,0,10,0,5
  -fb
 
  # Disable burrow since this is a water map
@@ -27,15 +27,15 @@ options
  -set _explodeTime 2
  -set _tankSpeed 45
  -set _noClimb 0
- -set _shotRange 200
- -set _shotSpeed 1000
- -set _reloadTime 20
- -set _shotTailLength 10
+ # -set _shotRange 100
+ -set _shotSpeed 100
+ -set _reloadTime 12
+ # -set _shotTailLength 10
  -set _shotsKeepVerticalVelocity 1
  -ms 50
  -set _wingsJumpCount 1000
  -set _wingsGravity -7
- -set _laserAdVel 12
+ -set _laserAdVel 400
  -set _laserAdLife 0.01
 end
 
@@ -61,10 +61,15 @@ base
 end
 
 zone
- position 450 0 20
- size 20 200 5
- zoneflag WG 10
- zoneflag L 5
+ position 450 150 20
+ size 20 50 5
+ zoneflag GM 5
+ team 1
+end
+zone
+ position 450 -150 20
+ size 20 50 5
+ zoneflag GM 5
  team 1
 end
 
@@ -72,25 +77,41 @@ zone
  position 400 0 2
  size 100 200 5
  zoneflag SW 5
- zoneflag GM 5
+ zoneflag L 5
  team 1
 end
 
-
 zone
- position -450 0 20
- size 20 200 5
- zoneflag WG 10
- zoneflag L 5
- team 3
+ position -450 150 20
+ size 20 50 5
+ zoneflag GM 5
+ team 1
+end
+zone
+ position -450 -150 20
+ size 20 50 5
+ zoneflag GM 5
+ team 1
 end
 
 zone
  position -400 0 2
  size 100 200 5
  zoneflag SW 5
- zoneflag GM 5
+ zoneflag L 5
  team 1
+end
+
+zone
+ position 0 300 5
+ size 230 20 1
+ zoneflag WG 20
+end
+
+zone
+ position 0 -300 5
+ size 230 20 1
+ zoneflag WG 20
 end
 
 # Physics (siderails)
