@@ -73,13 +73,6 @@ zone
  team 1
 end
 
-zone
- position 400 0 2
- size 100 200 5
- zoneflag SW 5
- zoneflag L 5
- team 1
-end
 
 zone
  position -450 150 20
@@ -94,14 +87,41 @@ zone
  team 1
 end
 
+# Corners
 zone
- position -400 0 2
- size 100 200 5
+ position 400 400 2
+ size 50 50 5
  zoneflag SW 5
+ zoneflag SB 5
+ zoneflag L 5
+ team 1
+end
+zone
+ position 400 -400 2
+ size 50 50 5
+ zoneflag SW 5
+ zoneflag SB 5
+ zoneflag L 5
+ team 1
+end
+zone
+ position -400 400 2
+ size 50 50 5
+ zoneflag SW 5
+ zoneflag SB 5
+ zoneflag L 5
+ team 1
+end
+zone
+ position -400 -400 2
+ size 50 50 5
+ zoneflag SW 5
+ zoneflag SB 5
  zoneflag L 5
  team 1
 end
 
+# Islands
 zone
  position 0 300 5
  size 230 20 1
@@ -164,8 +184,8 @@ end
 # Platforms
 
 meshbox
- position 430 0 15
- size 45 360 1
+ position 410 0 15
+ size 65 360 1
 end
 
 meshbox
@@ -179,8 +199,8 @@ meshbox
 end
 
 meshbox
- position -430 0 15
- size 45 360 1
+ position -410 0 15
+ size 65 360 1
 end
 
 meshbox
@@ -196,8 +216,8 @@ end
 # Corner platforms and their walls
 
 meshbox
- position 450 430 15
- size 50 70 1
+ position 430 430 15
+ size 70 70 1
 end
 meshbox
  position 487.5 359 15
@@ -205,8 +225,8 @@ meshbox
 end
 
 meshbox
- position 450 -430 15
- size 50 70 1
+ position 430 -430 15
+ size 70 70 1
 end
 meshbox
  position 487.5 -359 15
@@ -214,8 +234,8 @@ meshbox
 end
 
 meshbox
- position -450 430 15
- size 50 70 1
+ position -430 430 15
+ size 70 70 1
 end
 meshbox
  position -487.5 359 15
@@ -223,8 +243,8 @@ meshbox
 end
 
 meshbox
- position -450 -430 15
- size 50 70 1
+ position -430 -430 15
+ size 70 70 1
 end
 meshbox
  position -487.5 -359 15
